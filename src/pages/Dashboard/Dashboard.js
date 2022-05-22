@@ -1,10 +1,16 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
+import DashboardSidebar from '../../components/DashboardSidebar';
 
 const Dashboard = () => {
     return (
-        <div>
-            Dashboard page
-        </div>
+        <>
+
+            <DashboardSidebar>
+                <h2 className="text-2xl font-bold mb-3">Dashboard</h2>
+                <Outlet />
+            </DashboardSidebar>
+        </>
     );
 };
 

@@ -1,7 +1,9 @@
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import auth from '../firebase.init';
+import Loading from './Loading';
 
 
 const Navbar = ({ children }) => {
@@ -31,16 +33,41 @@ const Navbar = ({ children }) => {
             setTheme('light');
         }
     }
+    const handleSignOut = () => {
+        signOut(auth);
+        localStorage.removeItem('accessToken');
+    }
 
+    if (loading) {
+        return <Loading />
+    }
 
 
     const menuItems = <>
         <li> <NavLink className='rounded-lg lg:ml-2' to='/'>Home</NavLink> </li>
-        <li> <NavLink className='rounded-lg lg:ml-2' to='/dashboard'>DashboarD</NavLink> </li>
-
-
         <li> <NavLink className='rounded-lg lg:ml-2' to='/blogs'>Blogs</NavLink> </li>
-        <li> <NavLink className='rounded-lg lg:ml-2' to='/login'>Login</NavLink> </li>
+
+        {
+            user ? <>
+                <div class="dropdown dropdown-end">
+                    <label tabindex="0" class="btn btn-ghost lg:ml-5 font-bold">
+                        {
+                            user?.displayName.split(' ')[0] || 'user'
+                        }
+                    </label>
+                    <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                        <li><Link to='/dashboard/'>Dashboard</Link></li>
+                        <li><button onClick={handleSignOut}>Logout</button></li>
+                    </ul>
+                </div>
+
+            </>
+                :
+                <li> <NavLink className='rounded-lg lg:ml-2' to='/login'>Login</NavLink> </li>
+
+        }
+
+
 
 
         <label className="swap swap-rotate lg:ml-3">

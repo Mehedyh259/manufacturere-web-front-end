@@ -8,10 +8,11 @@ const useToken = (user) => {
         const getToken = async () => {
             console.log(user);
             let email = user?.user?.email;
+            const loggedUser = { email: email }
             if (email) {
-                const { data } = await axios.post('http://localhost:5000/login', { email });
-                setToken(data.accessToken);
-                localStorage.setItem('accessToken', data.accessToken);
+                const { data } = await axios.put(`http://localhost:5000/user/${email}`, loggedUser);
+                setToken(data.token);
+                localStorage.setItem('accessToken', data.token);
             }
         }
         getToken();
