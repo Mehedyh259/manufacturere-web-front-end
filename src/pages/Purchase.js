@@ -52,7 +52,7 @@ const Purchase = () => {
     return (
         <div className='my-16 px-5 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-4'>
             <div class="card lg:card-side bg-base-100 shadow-xl">
-                <figure><img src={product?.data?.image} alt="Album" /></figure>
+                <figure><img src={product?.data?.image} style={{ maxWidth: "500px" }} alt="Album" /></figure>
                 <div class="card-body">
                     <h2 class="card-title text-primary">{product?.data?.name}!</h2>
                     <p>{product?.data?.description}</p>

@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import 'aos/dist/aos.css';
 import { useEffect } from "react";
 import AOS from 'aos';
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
 
 
           </Routes>
+          <Footer />
         </div>
         <ToastContainer />
       </Navbar>
