@@ -7,7 +7,6 @@ const Dashboard = () => {
         <>
 
             <DashboardSidebar>
-                <h2 className="text-2xl font-bold mb-3">Dashboard</h2>
                 <Outlet />
             </DashboardSidebar>
         </>

@@ -16,9 +16,9 @@ const GoogleLogin = () => {
 
     useEffect(() => {
         if (token) {
-            navigate('/')
+            navigate(from, { replace: true })
         }
-    }, [token, navigate])
+    }, [token, navigate, from])
 
     if (error) {
         errorMessage = <p className='p-2 text-center rounded-lg text-white bg-red-500'>{error?.message}</p>

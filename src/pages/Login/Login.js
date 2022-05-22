@@ -25,9 +25,9 @@ const Login = () => {
 
     useEffect(() => {
         if (token) {
-            navigate('/')
+            navigate(from, { replace: true })
         }
-    }, [token, navigate])
+    }, [token, from, navigate])
 
     const onSubmit = async (data) => {
         console.log(data);

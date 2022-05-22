@@ -56,7 +56,7 @@ const Navbar = ({ children }) => {
                         }
                     </label>
                     <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                        <li><Link to='/dashboard/'>Dashboard</Link></li>
+                        <li><Link to='/dashboard/my-profile'>Dashboard</Link></li>
                         <li><button onClick={handleSignOut}>Logout</button></li>
                     </ul>
                 </div>
