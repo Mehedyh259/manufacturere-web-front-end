@@ -1,11 +1,16 @@
 import React from 'react';
 import { useQuery } from 'react-query';
+import Loading from '../../components/Loading';
 import fetchApi from '../../interceptor';
 import Product from './Product';
 
 const Products = () => {
 
     const { data: products, isLoading, refetch } = useQuery('available', async () => await fetchApi.get('/product?limit=6'));
+
+    if (isLoading) {
+        return <Loading />
+    }
 
     return (
         <div className='my-16'>

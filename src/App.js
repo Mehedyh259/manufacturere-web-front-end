@@ -7,9 +7,16 @@ import { privateRoutes } from "./routes/privateRoute";
 import { publicRoutes } from './routes/publicRoute';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
+import AOS from 'aos';
 
 
 function App() {
+
+  useEffect(() => {
+    AOS.init();
+  }, [])
 
   return (
     <>
