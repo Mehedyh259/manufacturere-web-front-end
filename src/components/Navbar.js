@@ -9,13 +9,11 @@ const Navbar = ({ children }) => {
 
     useEffect(() => {
         const value = localStorage.getItem('theme');
-        console.log(value);
         if (value === null) {
             setTheme('light');
             localStorage.setItem('theme', 'light');
         } else {
             setTheme(value)
-            console.log("effect: ", theme);
         }
     }, [])
 
@@ -33,9 +31,8 @@ const Navbar = ({ children }) => {
 
     const menuItems = <>
         <li> <NavLink className='rounded-lg lg:ml-2' to='/'>Home</NavLink> </li>
-        {
-            user && <li> <NavLink className='rounded-lg lg:ml-2' to='/dashboard/add-service'>Dashboard</NavLink> </li>
-        }
+        <li> <NavLink className='rounded-lg lg:ml-2' to='/dashboard'>DashboarD</NavLink> </li>
+
 
         <li> <NavLink className='rounded-lg lg:ml-2' to='/blogs'>Blogs</NavLink> </li>
         <li> <NavLink className='rounded-lg lg:ml-2' to='/login'>Login</NavLink> </li>
