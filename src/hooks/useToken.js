@@ -6,7 +6,6 @@ const useToken = (user) => {
     const [token, setToken] = useState('');
     useEffect(() => {
         const getToken = async () => {
-            console.log(user);
             let email = user?.user?.email;
             const loggedUser = { email: email }
             if (email) {

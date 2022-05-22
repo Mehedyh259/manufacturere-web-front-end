@@ -1,7 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import auth from '../firebase.init';
+import useAdmin from '../hooks/useAdmin';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import Loading from './Loading';
 
 const DashboardSidebar = ({ children }) => {
+
+    const [user, isloading] = useAuthState(auth)
+    const [role] = useAdmin(user);
+
+    if (isloading) {
+        return <Loading />
+    }
+
     return (
         <div>
             <div class="drawer bg-accent drawer-mobile">
@@ -15,8 +27,21 @@ const DashboardSidebar = ({ children }) => {
                     <label for="my-drawer-2" class="drawer-overlay"></label>
                     <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
                         {/* <!-- Sidebar content here --> */}
-                        <li className='mb-2'><NavLink to="/dashboard/my-orders">My Orders</NavLink></li>
-                        <li className='mb-2'><NavLink to="/dashboard/my-reviews">My Reviews</NavLink></li>
+
+                        {
+                            role === 'user' && <>
+                                <li className='mb-2'><NavLink to="/dashboard/my-orders">My Orders</NavLink></li>
+                                <li className='mb-2'><NavLink to="/dashboard/my-reviews">My Reviews</NavLink></li>
+
+                            </>
+                        }
+                        {
+                            role === 'admin' && <>
+                                <li className='mb-2'><NavLink to="/dashboard/manage-orders">Manage Orders</NavLink></li>
+                                <li className='mb-2'><NavLink to="/dashboard/manage-users">Manage Users</NavLink></li>
+
+                            </>
+                        }
 
                     </ul>
 
