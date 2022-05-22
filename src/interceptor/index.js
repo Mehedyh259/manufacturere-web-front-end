@@ -6,7 +6,9 @@ const fetchApi = axios.create({
     headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`
     }
-})
+});
+
+
 
 
 export default fetchApi;

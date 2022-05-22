@@ -16,7 +16,7 @@ const DashboardSidebar = ({ children }) => {
 
     return (
         <div>
-            <div class="drawer bg-accent drawer-mobile">
+            <div class="drawer bg-base-200 drawer-mobile">
                 <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
                 <div class="drawer-content p-2">
                     {/* <!-- Page content here --> */}
