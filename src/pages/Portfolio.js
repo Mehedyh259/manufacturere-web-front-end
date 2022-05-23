@@ -3,10 +3,10 @@ import React from 'react';
 const Portfolio = () => {
     return (
         <div className='my-12 flex justify-center'>
-            <div class="card w-full lg:w-1/2 bg-base-200 shadow-xl">
+            <div className="card w-full lg:w-1/2 bg-base-200 shadow-xl">
 
-                <div class="card-body">
-                    <h2 class="card-title">My Profile</h2>
+                <div className="card-body">
+                    <h2 className="card-title">My Profile</h2>
                     <p>Name: Md. Mehedi Hasan</p>
                     <p>Email: mehedyh259@gmail.com</p>
                     <p>Education: Completed B.Sc. in Computer Science and Engineering</p>

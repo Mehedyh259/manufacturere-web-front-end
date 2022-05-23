@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 import Loading from '../../components/Loading';
 import OrderCancelModal from '../../components/OrderCancelModal';
 import fetchApi from '../../interceptor';
@@ -17,8 +18,17 @@ const ManageOrders = () => {
     const handleCancel = async (order) => {
         setOrderCancel(order);
     }
-    const handleConfirm = async (order) => {
-        console.log(order);
+    const handleConfirm = async (id) => {
+        const accept = {
+            status: 'paid'
+        }
+
+        const { data } = await fetchApi.put(`/order/accept/${id}`, accept);
+        if (data.acknowledged) {
+            toast.success("Order Payment Accepted")
+            refetch()
+        }
+
     }
 
 
@@ -67,7 +77,7 @@ const ManageOrders = () => {
                                         </>
                                     }
                                     {
-                                        order.status === 'pending' && <label onClick={() => handleConfirm(order)} htmlFor="order-cancel-modal" className="btn btn-success btn-xs text-white">accept payment</label>
+                                        order.status === 'pending' && <label onClick={() => handleConfirm(order._id)} htmlFor="order-cancel-modal" className="btn btn-success btn-xs text-white">accept payment</label>
                                     }
                                     {
                                         order.status === 'paid' && "Shipped"

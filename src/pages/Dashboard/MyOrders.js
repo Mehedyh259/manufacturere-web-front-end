@@ -15,15 +15,12 @@ const MyOrders = () => {
 
     const [user, loading] = useAuthState(auth);
 
-    const { data: orders, isLoading, refetch } = useQuery(['orders', user], async () => await fetchApi.get(`/order/${user?.email}`))
+    const { data: orders, isLoading, refetch } = useQuery(['orders', user], async () => await fetchApi.get(`/order?email=${user?.email}`))
 
     if (loading || isLoading) {
         return <Loading />
     }
 
-    const handlePayment = (id) => {
-        console.log(id);
-    }
 
     const handleCancel = async (order) => {
         setOrderCancel(order);
@@ -48,12 +45,12 @@ const MyOrders = () => {
                     </thead>
                     <tbody>
                         {
-                            orders.data?.map((order, index) => <tr key={index}>
+                            orders?.data?.map((order, index) => <tr key={index}>
                                 <td>
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
                                             <div className="mask mask-squircle w-12 h-12">
-                                                <img src={order.image} alt="Avatar Tailwind CSS Component" />
+                                                <img src={order.image} alt="image" />
                                             </div>
                                         </div>
                                         <p className="font-bold">{order.productName}</p>
