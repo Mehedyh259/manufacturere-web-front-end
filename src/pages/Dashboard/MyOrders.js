@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
-import { toast } from 'react-toastify';
 import Loading from '../../components/Loading';
+import OrderCancelModal from '../../components/OrderCancelModal';
 import auth from '../../firebase.init';
 import fetchApi from '../../interceptor';
-import OrderCancelModal from './OrderCancelModal';
+
 
 
 const MyOrders = () => {

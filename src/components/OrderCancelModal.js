@@ -1,6 +1,7 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import fetchApi from '../../interceptor';
+import fetchApi from '../interceptor';
+
 
 const OrderCancelModal = ({ orderCancel, setOrderCancel, refetch }) => {
 

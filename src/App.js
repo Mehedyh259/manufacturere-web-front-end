@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import RequireAuth from "./authentication/RequireAuth";
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import { nestedRoutes } from "./routes/nestedRoute";
 import { privateRoutes } from "./routes/privateRoute";
 import { publicRoutes } from './routes/publicRoute';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +11,13 @@ import { useEffect } from "react";
 import AOS from 'aos';
 import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
+import AddProduct from "./pages/Dashboard/AddProduct";
+import ManageOrders from "./pages/Dashboard/ManageOrders";
+import ManageUsers from "./pages/Dashboard/ManageUsers";
+import MyOrders from "./pages/Dashboard/MyOrders";
+import MyProfile from "./pages/Dashboard/MyProfile";
+import MyReviews from "./pages/Dashboard/MyReviews";
+import RequireAdmin from "./authentication/RequireAdmin";
 
 
 
@@ -38,11 +44,17 @@ function App() {
                 privateRoutes.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
               }
 
-              {/* all nested routes here */}
+              {/* nested routes */}
               <Route path='/dashboard' element={<Dashboard />}>
-                {
-                  nestedRoutes.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
-                }
+                <Route path='my-profile' element={<MyProfile />} />
+                <Route path='my-orders' element={<MyOrders />} />
+                <Route path='my-reviews' element={<MyReviews />} />
+
+                <Route element={<RequireAdmin />}>
+                  <Route path='manage-orders' element={<ManageOrders />} />
+                  <Route path='manage-users' element={<ManageUsers />} />
+                  <Route path='add-product' element={<AddProduct />} />
+                </Route>
               </Route>
 
             </Route>
