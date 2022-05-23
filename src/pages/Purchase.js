@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -9,44 +9,67 @@ import fetchApi from '../interceptor';
 
 const Purchase = () => {
     const { id } = useParams();
-    const navigate = useNavigate();
+
+    const [quantity, setQuantity] = useState(0);
+
 
     const [user, loading] = useAuthState(auth);
 
     const { data: product, isLoading, refetch } = useQuery(['product', id], async () => await fetchApi.get(`/product/${id}`));
 
+    useEffect(() => {
+        if (product) {
+            setQuantity(Number(product.data.minimumOrder))
+        }
+    }, [product])
+
     if (isLoading || loading) {
         return <Loading />
     }
 
+
+
+
     const handlePurchase = async (event) => {
         event.preventDefault();
         const purchaseQuantity = Number(event.target.quantity.value);
-        if (Number(product.data.quantity) < purchaseQuantity) {
-            toast.error("Purchase quantity  is more than the stocks !!")
-        } else {
-            const order = {
-                productId: product.data._id,
-                productName: product.data.name,
-                quantity: purchaseQuantity,
-                totalPrice: purchaseQuantity * Number(product.data.price),
-                status: 'due',
-                email: user.email,
-            }
-            const { data } = await fetchApi.post('/order', order);
-            if (data.insertedId) {
 
-                const updateField = {
-                    quantity: Number(product.data.quantity) - purchaseQuantity,
-                }
-                const { data: response } = await fetchApi.put(`/product/${id}`, updateField)
-                if (response) {
-                    refetch();
-                    toast.success('Order places successfully')
-                    event.target.reset();
-                }
+        const order = {
+            productId: product.data._id,
+            productName: product.data.name,
+            quantity: purchaseQuantity,
+            totalPrice: purchaseQuantity * Number(product.data.price),
+            status: 'due',
+            email: user.email,
+            image: product.data.image
+        }
+        const { data } = await fetchApi.post('/order', order);
+        if (data.insertedId) {
+
+            const updateField = {
+                quantity: Number(product.data.quantity) - purchaseQuantity,
+            }
+            const { data: response } = await fetchApi.put(`/product/${id}`, updateField)
+            if (response) {
+                refetch();
+                toast.success('Order placed successfully')
+                event.target.reset();
             }
         }
+    }
+
+    const handleIncrease = () => {
+        const input = document.getElementById('quantity');
+        const newValue = Number(input.value) + 1;
+        input.value = newValue;
+        setQuantity(newValue);
+    }
+
+    const handleDecrease = () => {
+        const input = document.getElementById('quantity');
+        const newValue = Number(input.value) - 1;
+        input.value = newValue;
+        setQuantity(newValue);
     }
 
     return (
@@ -70,10 +93,26 @@ const Purchase = () => {
                                 <label className="label">
                                     <span className="label-text">Purchase Quantity</span>
                                 </label>
-                                <input type="number" name='quantity' min={Number(product?.data?.minimumOrder)} placeholder={`Enter Quantity Minimum ${product?.data?.minimumOrder}`} className="input input-bordered" required />
+                                {/* <input type="number" name='quantity' min={Number(product?.data?.minimumOrder)} placeholder={`Enter Quantity Minimum ${product?.data?.minimumOrder}`} className="input input-bordered" required /> */}
+
+                                <div className="btn-group my-2">
+                                    <span onClick={handleDecrease} className="btn btn- font-bold">-</span>
+
+                                    <input type="number" readOnly disabled defaultValue={Number(product?.data?.minimumOrder)} name='quantity' id='quantity' className="input input-bordered w-50" required />
+
+                                    <span onClick={handleIncrease} className="btn btn-active font-bold">+</span>
+                                </div>
                             </div>
+                            {
+                                (quantity < Number(product?.data?.minimumOrder)) && <span className='text-error'>Please order minimum {product?.data?.minimumOrder} </span>
+                            }
+                            {
+                                (quantity > Number(product?.data?.quantity)) && <span className='text-error'>maximum order range {product?.data?.quantity} </span>
+                            }
                             <div className="form-control mt-6">
-                                <button type='submit' className="btn btn-primary">Make Purchase</button>
+                                <input type='submit' value={'Purchase'} className="btn btn-primary"
+                                    disabled={quantity < Number(product?.data?.minimumOrder) || quantity > Number(product?.data?.quantity)}
+                                />
                             </div>
                         </form>
                     </div>

@@ -37,8 +37,8 @@ const MyProfile = () => {
 
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 mt-10'>
-            <div class="card w-full bg-base-100 shadow-xl">
-                <div class="card-body">
+            <div className="card w-full bg-base-100 shadow-xl">
+                <div className="card-body">
                     <h2 className="text-3xl font-bold mb-5">My Profile</h2>
                     <div>
                         <p className="text-xl mb-3">Name: <span className="text-primary">{profile.data?.name}</span> </p>
@@ -50,8 +50,8 @@ const MyProfile = () => {
                     </div>
                 </div>
             </div>
-            <div class="card w-full bg-base-100 shadow-xl">
-                <div class="card-body">
+            <div className="card w-full bg-base-100 shadow-xl">
+                <div className="card-body">
                     <h2 className="text-3xl font-bold mb-2">Update Profile</h2>
                     <div>
                         <form onSubmit={handleProfile}>

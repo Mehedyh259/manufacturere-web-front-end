@@ -39,7 +39,7 @@ const MyReviews = () => {
                             <label className="label">
                                 <span className="label-text">Your Rating</span>
                             </label>
-                            <select name='rating' class="select select-bordered w-full">
+                            <select name='rating' className="select select-bordered w-full">
                                 <option value={5.0} selected>5.0</option>
                                 <option value={4.5}>4.5</option>
                                 <option value={4.0}>4.0</option>

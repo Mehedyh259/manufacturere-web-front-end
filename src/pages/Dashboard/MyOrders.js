@@ -1,10 +1,99 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
+import Loading from '../../components/Loading';
+import auth from '../../firebase.init';
+import fetchApi from '../../interceptor';
+import OrderCancelModal from './OrderCancelModal';
+
 
 const MyOrders = () => {
+
+    const [orderCancel, setOrderCancel] = useState(null);
+
+    const [user, loading] = useAuthState(auth);
+
+    const { data: orders, isLoading, refetch } = useQuery(['orders', user], async () => await fetchApi.get(`/order/${user?.email}`))
+
+    if (loading || isLoading) {
+        return <Loading />
+    }
+
+    const handlePayment = (id) => {
+        console.log(id);
+    }
+
+    const handleCancel = async (order) => {
+        setOrderCancel(order);
+    }
+
+
     return (
         <div>
-            My order page
-        </div>
+            <h2 className="text-3xl font-bold mb-5">My Orders</h2>
+
+            <div className="overflow-x-auto w-full">
+                <table className="table w-full p-3 bg-base-100">
+
+                    <thead >
+                        <tr>
+                            <th>Product</th>
+                            <th className='text-center'>Quantity</th>
+                            <th className='text-center'>Price</th>
+                            <th className='text-center'>Payment Status</th>
+                            <th className='text-center'>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            orders.data?.map((order, index) => <tr key={index}>
+                                <td>
+                                    <div className="flex items-center space-x-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-12 h-12">
+                                                <img src={order.image} alt="Avatar Tailwind CSS Component" />
+                                            </div>
+                                        </div>
+                                        <p className="font-bold">{order.productName}</p>
+                                    </div>
+                                </td>
+                                <td className='text-center'>{order.quantity}</td>
+                                <td className='text-center'>${order.totalPrice}</td>
+                                <td className='text-center'>{order.status}</td>
+                                <th className='text-center font-bold'>
+                                    {
+                                        order.status === 'due' && <>
+                                            <button onClick={() => handlePayment(order._id)} className="btn btn-success btn-sm mr-2">Pay</button>
+
+                                            <label onClick={() => handleCancel(order)} htmlFor="order-cancel-modal" className="btn btn-error btn-sm">cancel</label>
+                                        </>
+                                    }
+                                    {
+                                        order.status === 'pending' && "pending confirm"
+                                    }
+                                    {
+                                        order.status === 'paid' && "paid"
+                                    }
+                                </th>
+                            </tr>)
+                        }
+
+                    </tbody>
+
+
+
+                </table>
+                {
+                    orderCancel && <OrderCancelModal
+                        orderCancel={orderCancel}
+                        setOrderCancel={setOrderCancel}
+                        refetch={refetch}
+                    />
+                }
+            </div>
+
+        </div >
     );
 };
 
