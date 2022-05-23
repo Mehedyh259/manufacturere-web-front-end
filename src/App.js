@@ -11,6 +11,7 @@ import 'aos/dist/aos.css';
 import { useEffect } from "react";
 import AOS from 'aos';
 import Footer from "./components/Footer";
+import NotFound from "./pages/NotFound";
 
 
 function App() {
@@ -42,6 +43,9 @@ function App() {
                 nestedRoutes.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
               }
             </Route>
+
+
+            <Route path='*' element={<NotFound />} />
 
 
           </Routes>

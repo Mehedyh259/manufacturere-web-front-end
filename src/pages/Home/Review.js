@@ -4,11 +4,11 @@ import { FaStar } from 'react-icons/fa'
 const Review = ({ review }) => {
     const { name, description, rating } = review;
     return (
-        <div class="card w-full bg-base-200 shadow-xl">
-            <div class="card-body">
+        <div className="card w-full bg-base-200 shadow-xl">
+            <div className="card-body">
                 <p>{description}</p>
-                <div class="card-actions flex justify-start items-center mt-2">
-                    <div class="w-16 mask mask-squircle">
+                <div className="card-actions flex justify-start items-center mt-2">
+                    <div className="w-16 mask mask-squircle">
                         <img alt='...' src="https://api.lorem.space/image/face?hash=55350" />
                     </div>
                     <div>

@@ -7,7 +7,8 @@ const useToken = (user) => {
     useEffect(() => {
         const getToken = async () => {
             let email = user?.user?.email;
-            const loggedUser = { email: email }
+            let name = user?.user?.displayName;
+            const loggedUser = { email: email, name: name }
             if (email) {
                 const { data } = await axios.put(`http://localhost:5000/user/${email}`, loggedUser);
                 setToken(data.token);

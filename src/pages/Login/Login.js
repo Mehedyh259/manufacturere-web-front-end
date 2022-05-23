@@ -107,7 +107,7 @@ const Login = () => {
                         <input type="submit" value={'Login'} className='btn btn-accent text-white w-full max-w-md mt-3' />
                     </form>
 
-                    <p className="text-center my-2">New to doctors portal? <Link to='/register' className='text-primary'>Create an account</Link> </p>
+                    <p className="text-center my-2">New to Cell Mart? <Link to='/register' className='text-primary'>Create an account</Link> </p>
 
                     <GoogleLogin />
 

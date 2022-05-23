@@ -41,15 +41,15 @@ const AddProduct = () => {
 
     return (
         <div className='flex justify-center items-center mt-5'>
-            <div class="card flex-shrink-0 w-full max-w-xl shadow-2xl bg-base-100">
-                <div class="card-body">
+            <div className="card flex-shrink-0 w-full max-w-xl shadow-2xl bg-base-100">
+                <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
 
 
-                            <div class="form-control">
-                                <label class="label">
-                                    <span class="label-text">Name</span>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Name</span>
                                 </label>
                                 <input
                                     {...register("name", {
@@ -61,14 +61,14 @@ const AddProduct = () => {
                                     )}
                                     type="text"
                                     placeholder="Product Name"
-                                    class="input input-bordered" />
+                                    className="input input-bordered" />
                                 <label className="label">
                                     {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
                                 </label>
                             </div>
-                            <div class="form-control">
-                                <label class="label">
-                                    <span class="label-text">Descripton</span>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Descripton</span>
                                 </label>
                                 <input
                                     {...register("description", {
@@ -80,14 +80,14 @@ const AddProduct = () => {
                                     )}
                                     type="text"
                                     placeholder="Product Description"
-                                    class="input input-bordered" />
+                                    className="input input-bordered" />
                                 <label className="label">
                                     {errors.description?.type === 'required' && <span className="label-text-alt text-red-500">{errors.description.message}</span>}
                                 </label>
                             </div>
-                            <div class="form-control">
-                                <label class="label">
-                                    <span class="label-text">Price</span>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Price</span>
                                 </label>
                                 <input
                                     {...register("price", {
@@ -100,14 +100,14 @@ const AddProduct = () => {
                                     type="number"
                                     placeholder="Product Price"
                                     min={1}
-                                    class="input input-bordered" />
+                                    className="input input-bordered" />
                                 <label className="label">
                                     {errors.price?.type === 'required' && <span className="label-text-alt text-red-500">{errors.price.message}</span>}
                                 </label>
                             </div>
-                            <div class="form-control">
-                                <label class="label">
-                                    <span class="label-text">Quantty</span>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Quantty</span>
                                 </label>
                                 <input
                                     {...register("quantity", {
@@ -120,14 +120,14 @@ const AddProduct = () => {
                                     type="number"
                                     placeholder="Product quantity"
                                     min={1000}
-                                    class="input input-bordered" />
+                                    className="input input-bordered" />
                                 <label className="label">
                                     {errors.quantity?.type === 'required' && <span className="label-text-alt text-red-500">{errors.quantity.message}</span>}
                                 </label>
                             </div>
-                            <div class="form-control">
-                                <label class="label">
-                                    <span class="label-text">Minimum Order Quantity</span>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Minimum Order Quantity</span>
                                 </label>
                                 <input
                                     {...register("minimumOrder", {
@@ -140,14 +140,14 @@ const AddProduct = () => {
                                     type="number"
                                     placeholder=" minimum Order quantity"
                                     min={50}
-                                    class="input input-bordered" />
+                                    className="input input-bordered" />
                                 <label className="label">
                                     {errors.minimumOrder?.type === 'required' && <span className="label-text-alt text-red-500">{errors.minimumOrder.message}</span>}
                                 </label>
                             </div>
-                            <div class="form-control">
-                                <label class="label">
-                                    <span class="label-text">Product Image</span>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Product Image</span>
                                 </label>
                                 <input
                                     {...register("image", {
@@ -168,8 +168,8 @@ const AddProduct = () => {
                             </div>
                         </div>
 
-                        <div class="form-control mt-6">
-                            <button type='submit' class="btn btn-primary">Add Product</button>
+                        <div className="form-control mt-6">
+                            <button type='submit' className="btn btn-primary">Add Product</button>
                         </div>
                     </form>
                 </div>

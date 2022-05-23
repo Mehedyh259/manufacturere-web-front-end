@@ -51,10 +51,10 @@ const Purchase = () => {
 
     return (
         <div className='my-16 px-5 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-4'>
-            <div class="card lg:card-side bg-base-100 shadow-xl">
+            <div className="card lg:card-side bg-base-100 shadow-xl">
                 <figure><img src={product?.data?.image} style={{ maxWidth: "500px" }} alt="Album" /></figure>
-                <div class="card-body">
-                    <h2 class="card-title text-primary">{product?.data?.name}!</h2>
+                <div className="card-body">
+                    <h2 className="card-title text-primary">{product?.data?.name}!</h2>
                     <p>{product?.data?.description}</p>
                     <p className='font-bold'>Price Per Unit: ${product?.data?.price}</p>
                     <p className='font-bold'>Quantity: {product?.data?.quantity}</p>
@@ -63,17 +63,17 @@ const Purchase = () => {
             </div>
 
             <div className="flex justify-center">
-                <div class="card flex-shrink-0 w-full lg:max-w-md shadow-2xl bg-base-100">
-                    <div class="card-body">
+                <div className="card flex-shrink-0 w-full lg:max-w-md shadow-2xl bg-base-100">
+                    <div className="card-body">
                         <form onSubmit={handlePurchase}>
-                            <div class="form-control">
-                                <label class="label">
-                                    <span class="label-text">Purchase Quantity</span>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Purchase Quantity</span>
                                 </label>
-                                <input type="number" name='quantity' min={Number(product?.data?.minimumOrder)} placeholder={`Enter Quantity Minimum ${product?.data?.minimumOrder}`} class="input input-bordered" required />
+                                <input type="number" name='quantity' min={Number(product?.data?.minimumOrder)} placeholder={`Enter Quantity Minimum ${product?.data?.minimumOrder}`} className="input input-bordered" required />
                             </div>
-                            <div class="form-control mt-6">
-                                <button type='submit' class="btn btn-primary">Make Purchase</button>
+                            <div className="form-control mt-6">
+                                <button type='submit' className="btn btn-primary">Make Purchase</button>
                             </div>
                         </form>
                     </div>
