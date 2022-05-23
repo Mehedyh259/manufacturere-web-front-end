@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import OrderCancelModal from '../../components/OrderCancelModal';
 import auth from '../../firebase.init';
@@ -64,7 +65,7 @@ const MyOrders = () => {
                                 <th className='text-center font-bold'>
                                     {
                                         order.status === 'due' && <>
-                                            <button onClick={() => handlePayment(order._id)} className="btn btn-success btn-sm mr-2">Pay</button>
+                                            <Link to={`/dashboard/payment/${order._id}`} className="btn btn-success btn-sm mr-2">Pay</Link>
 
                                             <label onClick={() => handleCancel(order)} htmlFor="order-cancel-modal" className="btn btn-error btn-sm">cancel</label>
                                         </>
