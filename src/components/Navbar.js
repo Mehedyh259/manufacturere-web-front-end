@@ -53,7 +53,7 @@ const Navbar = ({ children }) => {
                 <div className="dropdown dropdown-end">
                     <label tabIndex="0" className="btn btn-ghost lg:ml-5 font-bold">
                         {
-                            user?.displayName.split(' ')[0] || 'user'
+                            user?.displayName?.split(' ')[0] || 'user'
                         }
                     </label>
                     <ul tabIndex="0" className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">

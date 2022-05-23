@@ -24,7 +24,7 @@ const Register = () => {
     useEffect(() => {
         if (user) {
             signOut(auth);
-            navigate('/login')
+            navigate('/login');
         }
     }, [user, navigate])
 

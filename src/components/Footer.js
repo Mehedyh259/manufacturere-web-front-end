@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer className='py-12 px-5 lg:px-12 bg-accent grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center'>
+        <footer className='py-12 px-5 lg:px-12 bg-accent grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
             <div className='flex justify-center items-center'>
                 <h2 className="text-3xl font-bold">Cell Mart</h2>
             </div>
@@ -22,11 +22,9 @@ const Footer = () => {
             </div>
             <div>
                 <h2 className="text-3xl font-bold">Follow Us</h2>
-                <ul>
-                    <li className='flex items-center' style={{ cursor: 'pointer' }}> <FaFacebook className='mr-2' />  Facebook</li>
-                    <li className='flex items-center' style={{ cursor: 'pointer' }}> <FaInstagram className='mr-2' />  Instagram</li>
-                    <li className='flex items-center' style={{ cursor: 'pointer' }}> <FaTwitter className='mr-2' />  Twitter</li>
-                </ul>
+                <li className='flex items-center' style={{ cursor: 'pointer' }}> <FaFacebook className='mr-2' />  Facebook</li>
+                <li className='flex items-center' style={{ cursor: 'pointer' }}> <FaInstagram className='mr-2' />  Instagram</li>
+                <li className='flex items-center' style={{ cursor: 'pointer' }}> <FaTwitter className='mr-2' />  Twitter</li>
             </div>
 
         </footer>
