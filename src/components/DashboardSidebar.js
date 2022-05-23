@@ -37,9 +37,10 @@ const DashboardSidebar = ({ children }) => {
                         }
                         {
                             role === 'admin' && <>
-                                <li className='mb-2'><NavLink to="/dashboard/manage-orders">Manage Orders</NavLink></li>
-                                <li className='mb-2'><NavLink to="/dashboard/manage-users">Manage Users</NavLink></li>
+                                <li className='mb-2'><NavLink to="/dashboard/manage-orders">Manage All Orders</NavLink></li>
+                                <li className='mb-2'><NavLink to="/dashboard/manage-users">Make Admin</NavLink></li>
                                 <li className='mb-2'><NavLink to="/dashboard/add-product">Add Product</NavLink></li>
+                                <li className='mb-2'><NavLink to="/dashboard/manage-products">Manage Products</NavLink></li>
 
                             </>
                         }
