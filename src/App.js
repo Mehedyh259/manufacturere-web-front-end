@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import AOS from 'aos';
 import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
+import ScrollToTop from "./components/ScrollTotop";
 
 
 function App() {
@@ -24,34 +25,34 @@ function App() {
     <>
       <Navbar>
         <div className="mt-16">
-          {/* all public routes here */}
-          <Routes>
-            {
-              publicRoutes.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
-            }
-
-            {/* all protected routes here */}
-            <Route element={<RequireAuth />}>
+          <ScrollToTop>
+            {/* all public routes here */}
+            <Routes>
               {
-                privateRoutes.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
+                publicRoutes.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
               }
 
-              {/* all nested routes here */}
-              <Route path='/dashboard' element={<Dashboard />}>
+              {/* all protected routes here */}
+              <Route element={<RequireAuth />}>
                 {
-                  nestedRoutes.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
+                  privateRoutes.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
                 }
+
+                {/* all nested routes here */}
+                <Route path='/dashboard' element={<Dashboard />}>
+                  {
+                    nestedRoutes.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
+                  }
+                </Route>
+
               </Route>
 
-            </Route>
+
+              <Route path='*' element={<NotFound />} />
 
 
-
-
-            <Route path='*' element={<NotFound />} />
-
-
-          </Routes>
+            </Routes>
+          </ScrollToTop>
           <Footer />
         </div>
         <ToastContainer />
