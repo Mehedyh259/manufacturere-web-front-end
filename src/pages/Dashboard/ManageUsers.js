@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import DeleteUserModal from '../../components/DeleteUserModal';
 import Loading from '../../components/Loading';
+import MakeAdminModal from '../../components/MakeAdminModal';
 import fetchApi from '../../interceptor';
 
 const ManageUsers = () => {
 
-    const [deleteUser, setDeleteUser] = useState(null)
+    const [deleteUser, setDeleteUser] = useState(null);
+    const [makeAdmin, setMakeAdmin] = useState(null);
+
     const { data: users, isLoading, refetch } = useQuery('users', async () => await fetchApi.get('/user'))
 
     if (isLoading) {
@@ -38,8 +41,8 @@ const ManageUsers = () => {
                                 <th className='text-center font-bold'>
                                     {
                                         user?.role !== 'admin' ? <>
-                                            <button className='btn btn-success btn-sm mr-2'>make admin</button>
-                                            <label onClick={() => setDeleteUser(user)} htmlFor='delete-user-modal' className='btn btn-error btn-sm mr-2'>delete user</label>
+                                            <label htmlFor='make-admin-modal' onClick={() => setMakeAdmin(user)} className='btn btn-success btn-sm mr-2'>make admin</label>
+                                            <label onClick={() => setDeleteUser(user)} htmlFor='delete-user-modal' className='btn btn-error btn-sm '>delete user</label>
                                         </>
                                             : <span>Can not take action</span>
                                     }
@@ -55,6 +58,13 @@ const ManageUsers = () => {
                     deleteUser && <DeleteUserModal
                         deleteUser={deleteUser}
                         setDeleteUser={setDeleteUser}
+                        refetch={refetch}
+                    />
+                }
+                {
+                    makeAdmin && <MakeAdminModal
+                        makeAdmin={makeAdmin}
+                        setMakeAdmin={setMakeAdmin}
                         refetch={refetch}
                     />
                 }
