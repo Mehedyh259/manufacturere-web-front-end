@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loading from '../components/Loading';
 import auth from '../firebase.init';
@@ -80,7 +80,7 @@ const Purchase = () => {
                 <div>
                     <figure><img src={product?.data?.image} style={{ maxWidth: "300px" }} alt="Album" /></figure>
                     <div className="card-body">
-                        <h2 className="card-title text-primary">{product?.data?.name}!</h2>
+                        <h2 className="card-title text-primary">{product?.data?.name}</h2>
                         <p>{product?.data?.description}</p>
                         <p className='font-bold'>Price Per Unit: ${product?.data?.price}</p>
                         <p className='font-bold'>Quantity: {product?.data?.quantity}</p>

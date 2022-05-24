@@ -46,13 +46,13 @@ const Navbar = ({ children }) => {
     const menuItems = <>
         <li> <NavLink className='rounded-lg lg:ml-2' to='/'>Home</NavLink> </li>
         <li> <NavLink className='rounded-lg lg:ml-2' to='/blogs'>Blogs</NavLink> </li>
-        <li> <NavLink className='rounded-lg lg:ml-2' to='/all-products'>Products</NavLink> </li>
+        <li> <NavLink className='rounded-lg lg:ml-2' to='/all-products'>All Parts</NavLink> </li>
         <li> <NavLink className='rounded-lg lg:ml-2' to='/portfolio'>MyPortfolio</NavLink> </li>
 
         {
             user ? <>
                 <div className="dropdown dropdown-end">
-                    <label tabIndex="0" className="btn btn-ghost lg:ml-5 font-bold">
+                    <label tabIndex="0" className="btn btn-accent lg:ml-5 font-bold">
                         {
                             user?.displayName?.split(' ')[0] || 'user'
                         }

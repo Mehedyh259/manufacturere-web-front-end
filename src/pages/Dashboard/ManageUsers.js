@@ -18,7 +18,7 @@ const ManageUsers = () => {
 
     return (
         <div>
-            <h2 className="text-3xl font-bold mb-5">My Orders</h2>
+            <h2 className="text-3xl font-bold mb-5">Manage All Users</h2>
 
             <div className="overflow-x-auto w-full">
                 <table className="table w-full p-3 bg-base-100">
@@ -36,7 +36,7 @@ const ManageUsers = () => {
                             users.data?.map((user, index) => <tr key={index}>
 
                                 <td className='text-center'>{user.name}</td>
-                                <td className='text-center'>${user.email}</td>
+                                <td className='text-center'>{user.email}</td>
                                 <td className='text-center'>{user?.role || 'user'}</td>
                                 <th className='text-center font-bold'>
                                     {

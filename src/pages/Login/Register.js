@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Loading from '../../components/Loading';
 import auth from '../../firebase.init';
 import GoogleLogin from './GoogleLogin';
@@ -24,6 +25,7 @@ const Register = () => {
     useEffect(() => {
         if (user) {
             signOut(auth);
+            toast.success('Registration Successful. Please Login !');
             navigate('/login');
         }
     }, [user, navigate])

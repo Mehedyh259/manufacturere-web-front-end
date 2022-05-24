@@ -16,7 +16,7 @@ const Portfolio = () => {
                     <p>Projects Live Link: </p>
                     <p><a target='_blank' href="https://solo-photographer.web.app/" rel="noreferrer">https://solo-photographer.web.app/</a></p>
                     <p><a target='_blank' href="https://medicine-inventory-76ade.web.app/" rel="noreferrer">https://medicine-inventory-76ade.web.app/</a></p>
-                    <p><a target='_blank' href="https://solo-photographer.web.app/" rel="noreferrer">https://solo-photographer.web.app/</a></p>
+                    <p><a target='_blank' href="https://to-do-app-344d8.web.app/" rel="noreferrer">https://to-do-app-344d8.web.app/</a></p>
 
                 </div>
             </div>

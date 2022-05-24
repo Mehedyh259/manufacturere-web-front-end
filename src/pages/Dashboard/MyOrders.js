@@ -58,7 +58,18 @@ const MyOrders = () => {
                                 </td>
                                 <td className='text-center'>{order.quantity}</td>
                                 <td className='text-center'>${order.totalPrice}</td>
-                                <td className='text-center'>{order.status}</td>
+                                <td className='text-center font-bold'>
+                                    {
+                                        order.status === 'due' && <small className='bg-red-400 text-white p-1 rounded'>unpaid</small>
+                                    }
+                                    {
+                                        order.status === 'pending' && <small className='bg-orange-400 text-white p-1 rounded'>pending</small>
+                                    }
+                                    {
+                                        order.status === 'paid' && <small className='bg-green-600 text-white p-1 rounded'>paid</small>
+                                    }
+
+                                </td>
                                 <th className='text-center font-bold'>
                                     {
                                         order.status === 'due' && <>
@@ -71,7 +82,7 @@ const MyOrders = () => {
                                         order.status === 'pending' && "pending confirm"
                                     }
                                     {
-                                        order.status === 'paid' && "paid"
+                                        order.status === 'paid' && <p>TxId: <small className="text-orange-600">{order?.transactionId}</small></p>
                                     }
                                 </th>
                             </tr>)

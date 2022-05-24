@@ -1,0 +1,18 @@
+1. How will you improve the performance of a React Application?
+
+There are so many steps that can improve the prformance of a react application.
+Mentioning 5 tips to improve application
+* By Using Immutable Data Structures
+* Don't use class component, use functional component
+* By Optimizing the dependencies
+* By Using React empty fragments to avoid unwanted html div
+* Avoiding Props in Initial States
+
+
+
+
+
+
+
+
+

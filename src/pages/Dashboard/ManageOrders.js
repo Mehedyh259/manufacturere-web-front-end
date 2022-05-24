@@ -53,7 +53,7 @@ const ManageOrders = () => {
                     </thead>
                     <tbody>
                         {
-                            orders.data?.map((order, index) => <tr key={index}>
+                            orders?.data?.map((order, index) => <tr key={index}>
                                 <td>
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
@@ -69,7 +69,12 @@ const ManageOrders = () => {
                                 <td className='text-center'>{order.phone}</td>
                                 <td className='text-center'>{order.quantity}</td>
                                 <td className='text-center'>${order.totalPrice}</td>
-                                <td className='text-center'>{order.status}</td>
+                                <td className='text-center capitalize font-bold'>
+                                    {
+                                        order.status === 'due' ? "unpaid" : order.status
+                                    }
+
+                                </td>
                                 <th className='text-center font-bold'>
                                     {
                                         order.status === 'due' && <>
