@@ -10,7 +10,7 @@ const Portfolio = () => {
                     <p>Name: Md. Mehedi Hasan</p>
                     <p>Email: mehedyh259@gmail.com</p>
                     <p>Education: Completed B.Sc. in Computer Science and Engineering</p>
-                    <p cla>My Programming skills: </p>
+                    <p >My Programming skills: </p>
                     <small>HTML, CSS, Bootstrap 5, React-Bootstrap, Tailwind CSS, Daisy UI, Javascript, ES6, React, React router, Express js, Mongodb</small>
 
                     <p>Projects Live Link: </p>
