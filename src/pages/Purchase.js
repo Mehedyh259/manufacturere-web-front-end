@@ -67,6 +67,10 @@ const Purchase = () => {
         setQuantity(newValue);
     }
 
+    const changeValue = (event) => {
+        setQuantity(Number((event.target.value)));
+    }
+
     const handleDecrease = () => {
         const input = document.getElementById('quantity');
         const newValue = Number(input.value) - 1;
@@ -127,7 +131,7 @@ const Purchase = () => {
                                 <div className="btn-group my-2">
                                     <span onClick={handleDecrease} className="btn btn- font-bold">-</span>
 
-                                    <input type="number" readOnly disabled defaultValue={Number(product?.data?.minimumOrder)} name='quantity' id='quantity' className="input input-bordered w-[150px]" required />
+                                    <input onKeyUp={changeValue} onChange={changeValue} type="number" defaultValue={Number(product?.data?.minimumOrder)} name='quantity' id='quantity' className="input input-bordered w-[150px]" min={0} required />
 
                                     <span onClick={handleIncrease} className="btn btn-active font-bold">+</span>
                                 </div>

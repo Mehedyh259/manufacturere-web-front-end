@@ -41,7 +41,7 @@ const AddProduct = () => {
 
     return (
         <div className='flex justify-center items-center mt-5'>
-            <div className="card flex-shrink-0 w-full max-w-xl shadow-2xl bg-base-100">
+            <div className="card flex-shrink-0 w-full max-w-2xl shadow-2xl bg-base-100">
                 <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
@@ -118,7 +118,7 @@ const AddProduct = () => {
                                     }
                                     )}
                                     type="number"
-                                    placeholder="Product quantity"
+                                    placeholder="Quantity minimum 1000"
                                     min={1000}
                                     className="input input-bordered" />
                                 <label className="label">
@@ -138,7 +138,7 @@ const AddProduct = () => {
                                     }
                                     )}
                                     type="number"
-                                    placeholder=" minimum Order quantity"
+                                    placeholder=" Minimum order 50 or more"
                                     min={50}
                                     className="input input-bordered" />
                                 <label className="label">

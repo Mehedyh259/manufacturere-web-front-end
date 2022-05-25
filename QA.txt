@@ -8,6 +8,18 @@ Mentioning 5 tips to improve application
 * By Using React empty fragments to avoid unwanted html div
 * Avoiding Props in Initial States
 
+2 What are the different ways to manage a state in a React application?
+
+There area 4 types of different ways to manage a state in react application.
+*LOCAL STATE: this state is managed by using (useState) react hook
+* Global STATE: this state is data that we manage in multiple components
+* Server STATE: Data Comes from the server and we integrate to our user interface of application
+* URL STATE: Data exist on the url of our application, that includes pathname query parameter etc.
+
+
+3. How does prototypical inheritance work?
+
+*Prototypical inheritance is a feature in javascript. It is used to add methods and properties in objects of javascript. by using this method an object can inherite other object properties. For doing prototypical inheritance we use Object. getPrototypeOf . When function is javascript engin adds a prototype to the function.
 
 
 

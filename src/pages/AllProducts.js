@@ -4,7 +4,7 @@ import Loading from '../components/Loading';
 import fetchApi from '../interceptor';
 import Product from './Home/Product';
 const AllProducts = () => {
-    const { data: products, isLoading } = useQuery('available', async () => await fetchApi.get('/product?limit=6'));
+    const { data: products, isLoading } = useQuery('available', async () => await fetchApi.get('/product'));
 
     if (isLoading) {
         return <Loading />

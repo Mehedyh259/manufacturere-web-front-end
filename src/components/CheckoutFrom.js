@@ -56,12 +56,12 @@ const CheckoutFrom = ({ order }) => {
             // store database
             const payment = {
                 order: _id,
-                transactionId: paymentIntent.id
+                transactionId: paymentIntent?.id
             }
             const { data } = fetchApi.put(`/order/${_id}`, payment)
 
             setCardError('');
-            setTransactionId(paymentIntent.id);
+            setTransactionId(paymentIntent?.id);
             setCardSuccess('Congrats. Your Payment is completed.')
         }
     }
