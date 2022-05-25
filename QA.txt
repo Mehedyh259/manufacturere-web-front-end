@@ -21,7 +21,24 @@ There area 4 types of different ways to manage a state in react application.
 
 *Prototypical inheritance is a feature in javascript. It is used to add methods and properties in objects of javascript. by using this method an object can inherite other object properties. For doing prototypical inheritance we use Object. getPrototypeOf . When function is javascript engin adds a prototype to the function.
 
+4. Why you do not set the state directly in React?
+There are some reason why we do not set the state directly.
+*If we update directly the state variable, after calling the seState() may replace the previous update we made.
+*Directly update state does not change this.state immediately. If we directly update the state value, we will lose control of the state acrosss all components of our appliction.
 
+5 You have an array of products. Each product has a name, price, description, etc. How will you implement a search to find products by name?
+
+To find the products by name we can use filter method. filter() method will give us an array as a return based on our condition. example code is written below.
+
+const products = [
+    {id: 1, name:'AB',price:12},
+    {id: 2, name:'BC',price:13},
+    {id: 3, name:'DE',price:14},
+    {id: 4, name:'CD',price:15}
+    ];
+    
+const result = products.filter(pd => pd.name.includes('C'));
+console.log(result);
 
 
 
