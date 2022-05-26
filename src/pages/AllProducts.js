@@ -1,10 +1,16 @@
+import axios from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../components/Loading';
-import fetchApi from '../interceptor';
 import Product from './Home/Product';
+
+
 const AllProducts = () => {
-    const { data: products, isLoading } = useQuery('available', async () => await fetchApi.get('/product'));
+    const { data: products, isLoading } = useQuery('available', async () => await axios.get('https://manufacture-web-1542.herokuapp.com/product', {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }));
 
     if (isLoading) {
         return <Loading />

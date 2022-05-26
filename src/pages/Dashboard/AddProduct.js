@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import fetchApi from '../../interceptor';
+
 
 
 const AddProduct = () => {
@@ -27,7 +27,11 @@ const AddProduct = () => {
                 image: imageUrl
             }
 
-            const { data: response } = await fetchApi.post('/product', product);
+            const { data: response } = await axios.post('https://manufacture-web-1542.herokuapp.com/product', product, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             if (response.insertedId) {
                 toast.success('product uploaded successfully')
             } else {

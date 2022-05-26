@@ -1,15 +1,20 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import Loading from '../../components/Loading';
 import OrderCancelModal from '../../components/OrderCancelModal';
-import fetchApi from '../../interceptor';
+
 
 const ManageOrders = () => {
     const [orderCancel, setOrderCancel] = useState(null);
 
 
-    const { data: orders, isLoading, refetch } = useQuery('orders', async () => await fetchApi.get('/order'))
+    const { data: orders, isLoading, refetch } = useQuery('orders', async () => await axios.get('https://manufacture-web-1542.herokuapp.com/order', {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }))
 
     if (isLoading) {
         return <Loading />
@@ -23,7 +28,11 @@ const ManageOrders = () => {
             status: 'paid'
         }
 
-        const { data } = await fetchApi.put(`/order/accept/${id}`, accept);
+        const { data } = await axios.put(`https://manufacture-web-1542.herokuapp.com/order/accept/${id}`, accept, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        });
         if (data.acknowledged) {
             toast.success("Order Payment Accepted")
             refetch()

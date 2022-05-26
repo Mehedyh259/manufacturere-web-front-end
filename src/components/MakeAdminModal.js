@@ -1,11 +1,16 @@
+import axios from 'axios';
 import React from 'react';
 import { toast } from 'react-toastify';
-import fetchApi from '../interceptor';
+
 
 const MakeAdminModal = ({ makeAdmin, setMakeAdmin, refetch }) => {
 
     const handleMakeAdmin = async () => {
-        const { data } = await fetchApi.put(`/user/admin/${makeAdmin.email}`);
+        const { data } = await axios.put(`https://manufacture-web-1542.herokuapp.com/user/admin/${makeAdmin.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        });
 
         if (data.result?.acknowledged) {
             toast.success("Made Admin successfully..!");

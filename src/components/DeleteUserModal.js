@@ -1,12 +1,17 @@
+import axios from 'axios';
 import React from 'react';
 import { toast } from 'react-toastify';
-import fetchApi from '../interceptor';
+
 
 
 const DeleteUserModal = ({ deleteUser, setDeleteUser, refetch }) => {
 
     const handleDeleteUser = async () => {
-        const { data } = await fetchApi.delete(`/user/${deleteUser.email}`);
+        const { data } = await axios.delete(`https://manufacture-web-1542.herokuapp.com/user/${deleteUser.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        });
         if (data.deletedCount) {
             toast.success("User Removed successfully..!");
             refetch();

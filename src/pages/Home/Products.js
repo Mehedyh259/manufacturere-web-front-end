@@ -1,13 +1,13 @@
+import axios from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import Loading from '../../components/Loading';
-import fetchApi from '../../interceptor';
 import Product from './Product';
 
 const Products = () => {
 
-    const { data: products, isLoading } = useQuery('available', async () => await fetchApi.get('/product?limit=3'));
+    const { data: products, isLoading } = useQuery('available', async () => await axios.get('https://manufacture-web-1542.herokuapp.com/product?limit=3'));
 
     if (isLoading) {
         return <Loading />

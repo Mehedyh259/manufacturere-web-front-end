@@ -1,6 +1,7 @@
 
+import axios from "axios";
 import { useEffect, useState } from "react";
-import fetchApi from "../interceptor";
+
 
 
 const useToken = (user) => {
@@ -11,9 +12,15 @@ const useToken = (user) => {
             let name = user?.user?.displayName;
             const loggedUser = { email: email, name: name }
             if (email) {
-                const { data } = await fetchApi.put(`/user/${email}`, loggedUser);
-                setToken(data.token);
-                localStorage.setItem('accessToken', data.token);
+                const { data } = await axios.put(`https://manufacture-web-1542.herokuapp.com/user/${email}`, loggedUser, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
+                if (data.token) {
+                    localStorage.setItem('accessToken', data.token);
+                    setToken(data.token);
+                }
 
             }
         }

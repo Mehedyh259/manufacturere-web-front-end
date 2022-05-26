@@ -1,16 +1,21 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import DeleteUserModal from '../../components/DeleteUserModal';
 import Loading from '../../components/Loading';
 import MakeAdminModal from '../../components/MakeAdminModal';
-import fetchApi from '../../interceptor';
+
 
 const ManageUsers = () => {
 
     const [deleteUser, setDeleteUser] = useState(null);
     const [makeAdmin, setMakeAdmin] = useState(null);
 
-    const { data: users, isLoading, refetch } = useQuery('users', async () => await fetchApi.get('/user'))
+    const { data: users, isLoading, refetch } = useQuery('users', async () => await axios.get('https://manufacture-web-1542.herokuapp.com/user', {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }))
 
     if (isLoading) {
         return <Loading />

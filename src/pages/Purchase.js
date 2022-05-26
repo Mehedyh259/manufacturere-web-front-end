@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
@@ -5,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loading from '../components/Loading';
 import auth from '../firebase.init';
-import fetchApi from '../interceptor';
+
 
 const Purchase = () => {
     const { id } = useParams();
@@ -15,7 +16,11 @@ const Purchase = () => {
 
     const [user, loading] = useAuthState(auth);
 
-    const { data: product, isLoading, refetch } = useQuery(['product', id], async () => await fetchApi.get(`/product/${id}`));
+    const { data: product, isLoading, refetch } = useQuery(['product', id], async () => await axios.get(`https://manufacture-web-1542.herokuapp.com/product/${id}`, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }));
 
     useEffect(() => {
         if (product) {
@@ -23,9 +28,10 @@ const Purchase = () => {
         }
     }, [product])
 
-    if (isLoading || loading) {
+    if (loading || isLoading) {
         return <Loading />
     }
+
 
 
 
@@ -45,13 +51,21 @@ const Purchase = () => {
             status: 'due',
             image: product.data.image
         }
-        const { data } = await fetchApi.post('/order', order);
+        const { data } = await axios.post('https://manufacture-web-1542.herokuapp.com/order', order, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        });
         if (data.insertedId) {
 
             const updateField = {
                 quantity: Number(product.data.quantity) - purchaseQuantity,
             }
-            const { data: response } = await fetchApi.put(`/product/${id}`, updateField)
+            const { data: response } = await axios.put(`https://manufacture-web-1542.herokuapp.com/product/${id}`, updateField, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             if (response) {
                 refetch();
                 toast.success('Order placed successfully')
@@ -131,17 +145,11 @@ const Purchase = () => {
                                 <div className="btn-group my-2">
                                     <span onClick={handleDecrease} className="btn btn- font-bold">-</span>
 
-                                    <input onKeyUp={changeValue} onChange={changeValue} type="number" defaultValue={Number(product?.data?.minimumOrder)} name='quantity' id='quantity' className="input input-bordered w-[150px]" min={0} required />
+                                    <input onKeyUp={changeValue} onChange={changeValue} type="number" defaultValue={product && Number(product?.data?.minimumOrder)} name='quantity' id='quantity' className="input input-bordered w-[150px]" min={0} required />
 
                                     <span onClick={handleIncrease} className="btn btn-active font-bold">+</span>
                                 </div>
                             </div>
-
-
-
-
-
-
 
 
 

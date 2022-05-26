@@ -1,12 +1,17 @@
 
+import axios from 'axios';
 import React from 'react';
 import { toast } from 'react-toastify';
-import fetchApi from '../interceptor';
+
 
 const ProductDeleteModal = ({ deleteProduct, setDeleteProduct, refetch }) => {
 
     const handleProductDelete = async () => {
-        const { data } = await fetchApi.delete(`/product/${deleteProduct._id}`);
+        const { data } = await axios.delete(`https://manufacture-web-1542.herokuapp.com/product/${deleteProduct._id}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        });
         if (data.deletedCount) {
             toast.success('product deleted successfully ');
             refetch();

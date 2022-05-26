@@ -1,16 +1,21 @@
-import { data } from 'autoprefixer';
+
+import axios from 'axios';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import Loading from '../../components/Loading';
 import auth from '../../firebase.init';
-import fetchApi from '../../interceptor';
+
 
 const MyProfile = () => {
     const [user, loading] = useAuthState(auth);
 
-    const { data: profile, isLoading, refetch } = useQuery(['profile', user], async () => await fetchApi.get(`/user/${user?.email}`));
+    const { data: profile, isLoading, refetch } = useQuery(['profile', user], async () => await axios.get(`https://manufacture-web-1542.herokuapp.com/user/${user?.email}`, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }));
 
     if (loading || isLoading) {
         return <Loading />
@@ -25,7 +30,11 @@ const MyProfile = () => {
             linkdin: event.target.linkdin.value,
         }
 
-        const { data } = await fetchApi.put(`/user/update/${user.email}`, userProfile);
+        const { data } = await axios.put(`https://manufacture-web-1542.herokuapp.com/user/update/${user.email}`, userProfile, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        });
         if (data.acknowledged) {
 
             toast.success('profile updated successfully')

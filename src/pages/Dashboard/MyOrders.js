@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
@@ -5,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import OrderCancelModal from '../../components/OrderCancelModal';
 import auth from '../../firebase.init';
-import fetchApi from '../../interceptor';
+
 
 
 
@@ -15,7 +16,11 @@ const MyOrders = () => {
 
     const [user, loading] = useAuthState(auth);
 
-    const { data: orders, isLoading, refetch } = useQuery(['orders', user], async () => await fetchApi.get(`/order?email=${user?.email}`))
+    const { data: orders, isLoading, refetch } = useQuery(['orders', user], async () => await axios.get(`https://manufacture-web-1542.herokuapp.com/order?email=${user?.email}`, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }))
 
     if (loading || isLoading) {
         return <Loading />

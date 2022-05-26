@@ -1,13 +1,18 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../../components/Loading';
 import ProductDeleteModal from '../../components/ProductDeleteModal';
-import fetchApi from '../../interceptor';
+
 
 const ManageProducts = () => {
     const [deleteProduct, setDeleteProduct] = useState(null);
 
-    const { data: products, isLoading, refetch } = useQuery('products', async () => await fetchApi.get('/product'));
+    const { data: products, isLoading, refetch } = useQuery('products', async () => await axios.get('https://manufacture-web-1542.herokuapp.com/product', {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }));
 
     if (isLoading) {
         return <Loading />

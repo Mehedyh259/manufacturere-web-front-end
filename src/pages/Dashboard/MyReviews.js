@@ -1,9 +1,10 @@
+import axios from 'axios';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import Loading from '../../components/Loading';
 import auth from '../../firebase.init';
-import fetchApi from '../../interceptor';
+
 
 
 const MyReviews = () => {
@@ -18,7 +19,11 @@ const MyReviews = () => {
             rating: event.target.rating.value,
             description: event.target.review.value
         }
-        const { data } = await fetchApi.post('/review', review);
+        const { data } = await axios.post('https://manufacture-web-1542.herokuapp.com/review', review, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        });
 
         if (data?.insertedId) {
             console.log(data);

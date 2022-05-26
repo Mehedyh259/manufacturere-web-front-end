@@ -1,17 +1,22 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import CheckoutFrom from '../../components/CheckoutFrom';
 import Loading from '../../components/Loading';
-import fetchApi from '../../interceptor';
+
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISH_KEY);
 
 const Payment = () => {
     const { id } = useParams();
-    const { data: order, isLoading, refetch } = useQuery(['order', id], async () => await fetchApi.get(`/order/${id}`))
+    const { data: order, isLoading, refetch } = useQuery(['order', id], async () => await axios.get(`https://manufacture-web-1542.herokuapp.com/order/${id}`, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }))
 
     if (isLoading) {
         return <Loading />

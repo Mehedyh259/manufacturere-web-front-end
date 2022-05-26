@@ -1,12 +1,12 @@
+import axios from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../../components/Loading';
-import fetchApi from '../../interceptor';
 import Review from './Review';
 
 const Reviews = () => {
 
-    const { data: reviews, isLoading, refetch } = useQuery('reviews', async () => await fetchApi.get('/review'))
+    const { data: reviews, isLoading, refetch } = useQuery('reviews', async () => await axios.get('https://manufacture-web-1542.herokuapp.com/review'))
 
     if (isLoading) {
         return <Loading />

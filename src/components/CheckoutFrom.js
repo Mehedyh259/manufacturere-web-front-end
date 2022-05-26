@@ -1,6 +1,7 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import fetchApi from '../interceptor';
+
 
 
 const CheckoutFrom = ({ order }) => {
@@ -13,7 +14,11 @@ const CheckoutFrom = ({ order }) => {
     const { _id, totalPrice: price, status } = order;
 
     useEffect(() => {
-        fetchApi.post('/create-payment-intent', { price }).then(res => setClientSecret(res.data.clientSecret))
+        axios.post('https://manufacture-web-1542.herokuapp.com/create-payment-intent', { price }, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        }).then(res => setClientSecret(res.data.clientSecret))
     }, [])
 
     const stripe = useStripe();
@@ -58,7 +63,11 @@ const CheckoutFrom = ({ order }) => {
                 order: _id,
                 transactionId: paymentIntent?.id
             }
-            const { data } = fetchApi.put(`/order/${_id}`, payment)
+            const { data } = axios.put(`https://manufacture-web-1542.herokuapp.com/order/${_id}`, payment, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
 
             setCardError('');
             setTransactionId(paymentIntent?.id);
