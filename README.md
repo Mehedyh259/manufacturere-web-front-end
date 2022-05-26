@@ -19,4 +19,4 @@
 * react-router-dom
 * firebase
 * Tailwind CSS & DaisyUi
-* Axios interceptor
+* Axios
