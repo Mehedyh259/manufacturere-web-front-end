@@ -13,7 +13,7 @@ const BusinessSummery = () => {
 
     return (
         <div className='counter-section my-10'>
-            <div className="container p-5">
+            <div className="container mx-auto p-5">
                 <h2 className="text-4xl text-primary font-bold text-center uppercase my-10">Millions of Business Trusts Us</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 counter-content mx-5 mb-10">
 
