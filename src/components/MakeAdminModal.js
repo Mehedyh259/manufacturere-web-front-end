@@ -5,8 +5,13 @@ import { toast } from 'react-toastify';
 
 const MakeAdminModal = ({ makeAdmin, setMakeAdmin, refetch }) => {
 
+
     const handleMakeAdmin = async () => {
-        const { data } = await axios.put(`https://manufacture-web-1542.herokuapp.com/user/admin/${makeAdmin.email}`, {
+        const url = `https://manufacture-web-1542.herokuapp.com/user/admin/${makeAdmin.email}`;
+
+        console.log(url);
+        const update = { role: 'admin' };
+        const { data } = await axios.put(url, update, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
